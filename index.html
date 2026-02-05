@@ -102,8 +102,8 @@
         dans notre cocon.
     </p>
 
-    <button id="yes">Oui ❤️</button>
-    <button id="no">Non 💔</button>
+    <button id="yes">Oui 💙</button>
+    <button id="no" type="button">Non 💔</button>
 </div>
 
 <script>
@@ -121,6 +121,34 @@
         noBtn.style.left = x + 'px';
         noBtn.style.bottom = y + 'px';
     });
+
+    document.addEventListener('mousemove', (e) => {
+        const rect = noBtn.getBoundingClientRect();
+        const distance = Math.hypot(
+            e.clientX - (rect.left + rect.width / 2),
+            e.clientY - (rect.top + rect.height / 2)
+        );
+    
+        if (distance < 80) {
+            const cardRect = card.getBoundingClientRect();
+            const maxX = card.clientWidth - noBtn.offsetWidth - 20;
+            const maxY = card.clientHeight - noBtn.offsetHeight - 20;
+    
+            const x = Math.random() * maxX;
+            const y = Math.random() * maxY;
+    
+            noBtn.style.left = x + 'px';
+            noBtn.style.bottom = y + 'px';
+        }
+    });
+
+
+    // sécurité : le bouton Non ne fait jamais rien
+    noBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+    });
+
 
     // clic sur Oui
     document.getElementById('yes').addEventListener('click', () => {
