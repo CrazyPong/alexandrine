@@ -92,4 +92,55 @@
 
 <div class="card">
     <h1 id="question">
-        Est-ce que tu accepterais d’être
+        Est-ce que tu accepterais d’être ma Valentine ?
+    </h1>
+
+    <p id="message">
+        Bonne réponse ❤️<br><br>
+        J’aimerais te donner rendez-vous<br>
+        le vendredi 13 février à 16h30,<br>
+        dans notre maison.
+    </p>
+
+    <button id="yes">Oui</button>
+    <button id="no">Non</button>
+</div>
+
+<script>
+    // animation du bouton "Non"
+    const noBtn = document.getElementById('no');
+    const card = document.querySelector('.card');
+
+    noBtn.addEventListener('mouseenter', () => {
+        const maxX = card.clientWidth - noBtn.offsetWidth - 20;
+        const maxY = card.clientHeight - noBtn.offsetHeight - 20;
+
+        const x = Math.random() * maxX;
+        const y = Math.random() * maxY;
+
+        noBtn.style.left = x + 'px';
+        noBtn.style.bottom = y + 'px';
+    });
+
+    // clic sur Oui
+    document.getElementById('yes').addEventListener('click', () => {
+        document.getElementById('question').style.display = 'none';
+        document.getElementById('yes').style.display = 'none';
+        document.getElementById('no').style.display = 'none';
+        document.getElementById('message').style.display = 'block';
+    });
+
+    // génération des cœurs
+    for (let i = 0; i < 20; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.innerHTML = '❤';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = (15 + Math.random() * 10) + 's';
+        heart.style.fontSize = (14 + Math.random() * 10) + 'px';
+        document.body.appendChild(heart);
+    }
+</script>
+
+</body>
+</html>
